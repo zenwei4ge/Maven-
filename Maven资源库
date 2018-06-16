@@ -1,0 +1,62 @@
+Maven本地资源库：  用来存储所有项目的依赖关系(插件jar和其他文件，这些文件被Maven下载)到本地文件夹。Maven的本地资源库默认为 .m2 目录文件夹：Windows –                 C:\Documents and Settings\{your-username}\.m2
+                  1. 更新Maven的本地库
+                     找到 {M2_HOME}\conf\setting.xml, 更新 localRepository 到其它名称
+                  2.保存文件
+                     执行命令mvn archetype:generate -DgroupId=com.yiibai -DartifactId=NumberGenerator -DarchetypeArtifactId=maven-  
+                  archetype-quickstart -DinteractiveMode=false
+Maven中央存储库：   当你建立一个 Maven 的项目，Maven 会检查你的 pom.xml 文件，以确定哪些依赖下载。首先，Maven 将从本地资源库获得 Maven 的本地资源库                 依赖资源，如果没有找到，然后把它会从默认的 Maven 中央存储库 – http://repo1.maven.org/maven2/ 查找下载。
+                  目录浏览可能不再使用。这将直接被重定向到 http://search.maven.org/有一个搜索功能。
+从Maven远程存储库下载：   当你声明的库不存在于本地存储库中，也没有不存在于Maven中心储存库，该过程将停止并将错误消息输出到 Maven 控制台。
+                  1.示例
+                    org.jvnet.localizer 只适用于 Java.net资源库
+                    <dependency>
+                            <groupId>org.jvnet.localizer</groupId>
+                            <artifactId>localizer</artifactId>
+                            <version>1.8</version>
+                    </dependency>
+                  2. 声明Java.net储存库
+                    <repositories>
+                        <repository>
+                            <id>java.net</id>
+                            <url>https://maven.java.net/content/repositories/public/</url>
+                        </repository>
+                    </repositories>
+                    查询顺序更改为最后会在java.net Maven的远程存储库搜索，如果没有找到，提示错误信息，否则退出
+Maven依赖机制：   在 Maven 依赖机制的帮助下自动下载所有必需的依赖库，并保持版本升级。假设你想使用 Log4j 作为项目的日志
+                 1.传统方式下
+                   访问 http://logging.apache.org/log4j/
+                   下载 Log4 j的 jar 库
+                   复制 jar 到项目类路径
+                   手动将其包含到项目的依赖
+                   所有的管理需要一切由自己做
+                  2. 在Maven的方式
+                     需要知道 log4j 的 Maven 坐标，例如：
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>1.2.14</version>
+                     它会自动下载 log4j 的1.2.14 版本库。如果“version”标签被忽略，它会自动升级库时当有新的版本时。
+                     声明 Maven 的坐标转换成 pom.xml 文件
+                         <dependencies>
+                              <dependency>
+                            <groupId>log4j</groupId>
+                            <artifactId>log4j</artifactId>
+                            <version>1.2.14</version>
+                              </dependency>
+                          </dependencies>
+                     当 Maven 编译或构建，log4j 的 jar 会自动下载，并把它放到 Maven 本地存储库，如何找到 Maven 坐标？
+                   访问 Maven 中心储存库，搜索下载您想要的jar
+定制库到Maven本地资源库：
+                    kaptcha，它是一个流行的第三方Java库，它被用来生成 “验证码” 的图片，以阻止垃圾邮件，但它不在 Maven 的中央仓库中。安装     
+                  “kaptcha”jar 到Maven 的本地资源库。
+                    1. mvn 安装
+                    下载 “kaptcha”，将其解压缩并将 kaptcha-version.jar 复制到其他地方，比如：C盘。执行命令：
+                      mvn install:install-file -Dfile=c:\kaptcha-2.3.jar -DgroupId=com.google.code -DartifactId=kaptcha -Dversion=2.3 
+                    -Dpackaging=jar
+                    “kaptcha” jar会被复制到 Maven 本地存储库
+                    2.在 pom.xml 中声明 kaptcha 的坐标。
+                       <dependency>
+                            <groupId>com.google.code</groupId>
+                            <artifactId>kaptcha</artifactId>
+                            <version>2.3</version>
+                       </dependency>
+                  
