@@ -1,0 +1,5 @@
+1. jdk和JAVA_HOME
+2. 下载Maven
+3. 添加 M2_HOME 和 MAVEN_HOME，指向你的 Maven 文件夹
+4. 添加到环境变量 - PATH，添加 Maven bin 文件夹到 PATH 的最后
+5. 验证执行 mvn –version
