@@ -1,0 +1,51 @@
+用到的技术/工具：
+
+        Maven 3.3.3
+        Eclipse 4.3
+        JDK 8
+        Spring 4.1.1.RELEASED
+        Tomcat 7
+        Logback 1.0.13
+1. 从Maven模板创建Web项目
+    使用Maven的maven-archetype-webapp模板来创建一个快速启动Java Web应用程序的项目，执行命令
+      mvn archetype:generate -DgroupId=com.yiibai  -DartifactId=CounterWebApp -DarchetypeArtifactId=maven-archetype-webapp -    
+     DinteractiveMode=false
+     新的Web项目命名为 “CounterWebApp”，以及一些标准的 web 目录结构也会自动创建。
+2. 项目目录布局
+      .|____CounterWebApp
+      ||____pom.xml
+      ||____src
+      |||____main
+      ||||____resources
+      ||||____webapp
+      |||||____index.jsp
+      |||||____WEB-INF
+      ||||||____web.xml
+3. Eclipse IDE 支持
+      进入到 “CounterWebApp” 文件夹中，键入以下命令：mvn eclipse:eclipse -Dwtpversion=2.0
+4. 更新POM
+      添加项目依赖 - Spring, logback 和 JUnit
+      添加插件来配置项目
+5. 更新源代码
+      建Spring MVC的一些文件和logback日志框架的文件夹，最终的项目结构如下所示：
+         .
+        |____pom.xml
+        |____src
+        | |____main
+        | | |____java
+        | | | |____com
+        | | | | |____yiibai
+        | | | | | |____controller
+        | | | | | | |____BaseController.java
+        | | |____resources
+        | | | |____logback.xml
+        | | |____webapp
+        | | | |____WEB-INF
+        | | | | |____mvc-dispatcher-servlet.xml
+        | | | | |____pages
+        | | | | | |____index.jsp
+        | | | | |____web.xml
+        5.1 创建 Spring MVC 的控制器类
+           
+    
+      
