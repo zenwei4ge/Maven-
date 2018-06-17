@@ -1,0 +1,99 @@
+第1步
+转到 New 菜单 Other.. -> Maven -> Maven Project ，然后单击 Next 
+第2步
+在New Maven Project向导中，选择Create a simple project并指定项目保存的目录(如：F:\worksp\Maven\webproject)，然后单击Next
+第3步
+在下一个向导中，添加项目信息，如下所示，然后单击Finish
+第4步
+打开pom.xml文件并在其中添加servlet依赖项和Tomcat maven插件
+                  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                    <modelVersion>4.0.0</modelVersion>
+                    <groupId>com.yiibai</groupId>
+                    <artifactId>webproject</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                    <packaging>war</packaging>
+
+                    <properties>
+                      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                      <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </properties>
+
+                      <dependencies>
+                      <!-- Servlet API -->
+                      <dependency>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                        <version>3.1.0</version>
+                        <scope>provided</scope>
+                      </dependency>
+                    </dependencies>
+
+                    <build>
+                      <sourceDirectory>src/main/java</sourceDirectory>
+                      <plugins>
+                        <plugin>
+                          <artifactId>maven-compiler-plugin</artifactId>
+                          <version>3.5.1</version>
+                          <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                          </configuration>
+                        </plugin>
+
+                        <!-- Embedded Apache Tomcat required for testing war -->
+
+                        <plugin>
+                          <groupId>org.apache.tomcat.maven</groupId>
+                          <artifactId>tomcat7-maven-plugin</artifactId>
+                          <version>2.2</version>
+                          <configuration>
+                            <path>/</path>
+                          </configuration>
+                        </plugin>
+                      </plugins>
+                    </build>
+                  </project>
+第6步
+现在，创建一个包：com.yiibai.servlet，并在此包下创建一个HelloWorldServlet类，并在其中写入以下代码。文件：HelloWorldServlet.java
+                  package com.yiibai.servlet;
+
+                  import java.io.IOException;
+
+                  import javax.servlet.ServletException;
+                  import javax.servlet.annotation.WebServlet;
+                  import javax.servlet.http.HttpServlet;
+                  import javax.servlet.http.HttpServletRequest;
+                  import javax.servlet.http.HttpServletResponse;
+
+                  /**
+                   * @author maxsu
+                   */
+                  @WebServlet("/hello")
+                  public class HelloWorldServlet extends HttpServlet {
+
+                      private static final long serialVersionUID = 1L;
+
+                      @Override
+                      protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                          resp.setContentType("text/plain");
+                          resp.getWriter().write("Hello World! Maven Web Project Example.");
+                      }
+                  }
+第7步
+使用以下maven命令构建项目。
+
+mvn clean install
+Shell
+要在Eclipse IDE中执行maven命令，请右键点击项目名称，打开Run菜单 -> Run Configuration..以创建新配置。
+
+在运行配置向导中，双击Maven Build并提供配置信息(Name，Base directory和Goals)   
+
+第8步
+使用以下命令运行嵌入式tomcat服务器。
+
+mvn tomcat7:run
+Shell
+要在Eclipse IDE中执行maven命令，请创建一个新的配置
+
+第9步
+打开浏览器并在地址栏中输入URL: http://localhost:8080/hello
