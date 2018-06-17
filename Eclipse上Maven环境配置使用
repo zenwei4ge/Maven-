@@ -1,0 +1,52 @@
+1. 安装配置Maven：
+　　1.1 从Apache网站 http://maven.apache.org/ 下载并且解压缩安装Apache Maven。
+　　　　Maven下载地址: http://maven.apache.org/download.cgi
+　　1.2 配置 Maven 的conf文件夹中配置文件settings.xml
+                <?xml version="1.0" encoding="UTF-8"?>
+
+                <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+                    <!--
+                    配置本地MAVEN仓库位置，默认在：C:\Users\机器名\.m2\repository
+                    <localRepository>D:\Program Files\mvn\</localRepository>  
+                    ** Eclipse->Windows->Preferences->java->Build Path->Classpath Variables 
+                    -->
+
+                    <pluginGroups>
+                    </pluginGroups>
+
+                    <proxies>
+                    </proxies>
+
+                    <servers>
+                    </servers>
+
+                    <mirrors>
+                        <mirror>
+                            <id>aliyun</id>
+                            <name>aliyun Maven</name>
+                            <mirrorOf>*</mirrorOf>
+                            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                        </mirror>
+                    </mirrors>
+
+                    <profiles>
+                    </profiles>
+
+                    <activeProfiles>
+                    </activeProfiles>
+                </settings>
+         1.3 修改settings.xml，添加镜像服务器设置：
+    　　使用阿里云提供的Maven镜像服务器。
+    　　阿里云镜像服务器URL: http://maven.aliyun.com/nexus/content/groups/public/
+2. Eclipse中Maven的配置：
+          2.1 打开Eclipse的首选项设置 Window-Preference
+          2.2 找到Maven的配置项目 Preference-User Settings
+          2.3 设置Maven的全局配置文件settings.xml
+          2.4 更新配置信息 Update Settings
+          2.5 找到Window菜单  Window-Show View-Other
+          2.6 开启Maven的视图, 检查是否已经配置了镜像库
+3.创建Maven 桌面项目
+         
