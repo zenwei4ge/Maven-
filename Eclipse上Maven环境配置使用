@@ -49,4 +49,13 @@
           2.5 找到Window菜单  Window-Show View-Other
           2.6 开启Maven的视图, 检查是否已经配置了镜像库
 3.创建Maven 桌面项目
-         
+4.在Eclipse中搜索添加Jar组件"坐标"
+          4.1 更新Maven库的索引文件
+                Window-Show View-Other-maven镜像库-右键Rebuild Index
+          4.2 打开Maven项目中的pom.xml文件
+          4.3 搜索需要jar组件包"坐标"
+          4.4 搜索结果就是在pom.xml文件中"坐标", 保存pom.xml时候会自动下载jar组件
+          4.5 使用Maven下载的jar组件. 组件保存在本地仓库".m2"文件夹中
+          4.6 如果出现下载故障, 可以在检查Maven仓库正常联通后, 再删除本地仓库".m2"以后"更新Maven 项目"
+              项目右键Maven-Update Project...
+           
